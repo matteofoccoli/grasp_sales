@@ -21,7 +21,8 @@ public class Sale {
     return time;
   }
 
-  // by Creator
+  // by Creator: sale contains line-items
+  // by Low Coupling: clients of sale do now know anything about line-item
   public void addLineItem(ProductDescription pd, int i) {
     lineItems.add(new LineItem(this, pd, i));
   }
@@ -30,7 +31,7 @@ public class Sale {
     return Collections.unmodifiableList(lineItems);
   }
 
-  // By Information Expert
+  // By Information Expert: sale has all the information to calculate total
   public Double getTotal() {
     Double total = 0d;
     for (LineItem lineItem : lineItems) {
