@@ -4,3 +4,7 @@ repos
 *.iml
 .gradle
 .DS_Store
+.classpath
+.project
+.settings
+bin
