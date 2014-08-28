@@ -9,9 +9,11 @@ import java.util.Date;
 public class Register {
 
   private final ProductCatalog catalog;
+  private final Store store;
   private Sale currentSale;
 
-  public Register(ProductCatalog catalog) {
+  public Register(Store store, ProductCatalog catalog) {
+    this.store = store;
     this.catalog = catalog;
   }
 
@@ -24,10 +26,26 @@ public class Register {
     return currentSale;
   }
 
+  // By Controller
   public void addSaleItem(String productCode, int quantity) {
-    // By Expert
+    // By Information Expert
     final ProductDescription description = catalog.findProductDescriptionByCode(productCode);
     // By Creator
     getCurrentSale().addLineItem(description, quantity);
   }
+
+  // By Controller
+  public void endSale() {
+    getCurrentSale().becomeComplete();
+  }
+
+  // By Controller
+  public void makePayment(double cashTendered) {
+    // By Creator
+    // By Low Coupling
+    getCurrentSale().makePayment(cashTendered);
+    // By Information Expert
+    store.addCompletedSale(getCurrentSale());
+  }
+  
 }

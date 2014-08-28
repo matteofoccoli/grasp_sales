@@ -4,18 +4,13 @@ package com.example.sales.domain;
  * Created by matteo on 23/08/14.
  */
 public class LineItem {
-  private Sale sale;
+
   private ProductDescription productDescription;
   private int quantity;
 
-  public LineItem(Sale sale, ProductDescription productDescription, int quantity) {
-    this.sale = sale;
+  public LineItem(ProductDescription productDescription, int quantity) {
     this.productDescription = productDescription;
     this.quantity = quantity;
-  }
-
-  public Sale getSale() {
-    return sale;
   }
 
   public ProductDescription getProductDescription() {
