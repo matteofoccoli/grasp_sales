@@ -54,7 +54,7 @@ public class RegisterTest {
   
   @Test
   public void makesPaymentForCurrentSale() throws Exception {
-    double cashTendered = 12.5d;
+    Money cashTendered = new Money(12.5d);
     
     register.makePayment(cashTendered);
     
@@ -63,7 +63,7 @@ public class RegisterTest {
   
   @Test
   public void logsSaleAfterPayment() throws Exception {
-    register.makePayment(12.23d);
+    register.makePayment(new Money(12.23d));
    
     assertThat(store.getCompletedSales().size(), equalTo(1));  
   }

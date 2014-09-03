@@ -9,15 +9,17 @@ import org.junit.Test;
 
 public class SaleTest {
 
-  private static final ProductDescription BUTTER = new ProductDescription(2, "butter", 0.5);
-  private static final ProductDescription WHITE_BREAD = new ProductDescription(1, "white bread", 1.0);
+  private static final ProductDescription BUTTER = new ProductDescription(2, "butter", new Money(0.5));
+  private static final ProductDescription WHITE_BREAD =
+      new ProductDescription(1, "white bread", new Money(1.0));
   private static final Date TODAY = new Date();
 
 
   @Test
   public void addsOneLineItemByCreatorGRASP() throws Exception {
     Sale s = new Sale(TODAY);
-    ProductDescription pd = new ProductDescription(12, "blah blah", 23.0);
+    ProductDescription pd = new ProductDescription(12, "blah blah",
+        new Money(23.0));
 
     s.addLineItem(pd, 3);
 
@@ -36,14 +38,14 @@ public class SaleTest {
     s.addLineItem(BUTTER, 2);
 
     assertThat("wrong number of line items", s.getLineItems().size(), equalTo(2));
-    assertThat("wrong total", s.getTotal(), equalTo(1.0 * 1 + 0.5 * 2));
+    assertThat("wrong total", s.getTotal().getAmount(), equalTo(1.0 * 1 + 0.5 * 2));
   }
 
   @Test
   public void calculatesBalance() throws Exception {
     Sale s = new Sale(TODAY);
     s.addLineItem(BUTTER, 10);
-    s.makePayment(1);
+    s.makePayment(new Money(1));
     
     assertThat(s.getBalance(), equalTo(4.0d));
   }

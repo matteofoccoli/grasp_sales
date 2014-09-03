@@ -6,9 +6,9 @@ package com.example.sales.domain;
 public class ProductDescription {
   private long id;
   private String description;
-  private Double price;
+  private Money price;
 
-  public ProductDescription(long id, String description, Double price) {
+  public ProductDescription(long id, String description, Money price) {
     this.id = id;
     this.description = description;
     this.price = price;
@@ -22,7 +22,7 @@ public class ProductDescription {
     return description;
   }
 
-  public Double getPrice() {
+  public Money getPrice() {
     return price;
   }
 }

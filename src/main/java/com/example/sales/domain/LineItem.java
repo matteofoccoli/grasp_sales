@@ -22,7 +22,7 @@ public class LineItem {
   }
 
   // By Information Expert
-  public Double getSubTotal() {
-    return getProductDescription().getPrice() * getQuantity();
+  public Money getSubtotal() {
+    return getProductDescription().getPrice().times(getQuantity());
   }
 }

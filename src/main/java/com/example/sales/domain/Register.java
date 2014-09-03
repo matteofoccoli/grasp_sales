@@ -40,7 +40,7 @@ public class Register {
   }
 
   // By Controller
-  public void makePayment(double cashTendered) {
+  public void makePayment(Money cashTendered) {
     // By Creator
     // By Low Coupling
     getCurrentSale().makePayment(cashTendered);

@@ -2,14 +2,14 @@ package com.example.sales.domain;
 
 public class Payment {
 
-  private double amount;
+  private Money amount;
 
-  public Payment(double amount) {
+  public Payment(Money amount) {
     super();
     this.amount = amount;
   }
 
-  public double getAmount() {
+  public Money getAmount() {
     return amount;
   }
   

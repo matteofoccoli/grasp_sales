@@ -36,10 +36,10 @@ public class Sale {
   }
 
   // By Information Expert: sale has all the information to calculate total
-  public Double getTotal() {
-    Double total = 0d;
+  public Money getTotal() {
+    Money total = new Money(0);
     for (LineItem lineItem : lineItems) {
-      total += lineItem.getSubTotal();
+      total.add(lineItem.getSubtotal());
     }
     return total;
   }
@@ -59,13 +59,13 @@ public class Sale {
 
   // By Creator: sale contains payment!
   // By Low Coupling: avoid other objects to know about payment
-  public void makePayment(double cashTendered) {
+  public void makePayment(Money cashTendered) {
     payment = new Payment(cashTendered);    
   }
 
   // By Information Expert: sale has all needed informations to calculate balance
   public Double getBalance() {
-    return getTotal() - getPayment().getAmount();
+    return getTotal().getAmount() - getPayment().getAmount().getAmount();
   }
   
 }
