@@ -10,11 +10,13 @@ public class Register {
 
   private final ProductCatalog catalog;
   private final Store store;
+  private final TaxCalculator taxCalculator;
   private Sale currentSale;
 
-  public Register(Store store, ProductCatalog catalog) {
+  public Register(Store store, ProductCatalog catalog, TaxCalculator taxCalculator) {
     this.store = store;
     this.catalog = catalog;
+    this.taxCalculator = taxCalculator;
   }
 
   // By Creator
@@ -37,6 +39,7 @@ public class Register {
   // By Controller
   public void endSale() {
     getCurrentSale().becomeComplete();
+    taxCalculator.getTaxes(getCurrentSale());
   }
 
   // By Controller

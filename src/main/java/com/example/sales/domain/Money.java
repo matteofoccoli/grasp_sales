@@ -21,4 +21,35 @@ public class Money {
   public void add(Money other) {
     amount += other.getAmount();
   }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    long temp;
+    temp = Double.doubleToLongBits(amount);
+    result = prime * result + (int) (temp ^ (temp >>> 32));
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if (this == other)
+      return true;
+    if (other == null)
+      return false;
+    if (getClass() != other.getClass())
+      return false;
+    if (Double.doubleToLongBits(amount) != Double
+        .doubleToLongBits(((Money) other).amount))
+      return false;
+    return true;
+  }
+
+  public boolean lessThan(Money other) {
+    if (getAmount() < other.getAmount())
+      return true;
+    return false;
+  }
+  
 }

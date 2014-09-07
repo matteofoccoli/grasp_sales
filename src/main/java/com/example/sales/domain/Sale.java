@@ -14,14 +14,33 @@ public class Sale {
   private List<LineItem> lineItems;
   private boolean complete;
   private Payment payment;
+  private PricingStrategy pricingStrategy;
 
   public Sale(Date time) {
     this.time = time;
     this.lineItems = new ArrayList<>();
+    this.pricingStrategy = new PricingStrategy() {
+      @Override
+      public Money getTotal(Sale sale) {
+        return Sale.this.getPreDiscountTotal();
+      }
+    };
+  }
+
+  public void setPricingStrategy(PricingStrategy pricingStrategy) {
+    this.pricingStrategy = pricingStrategy;
   }
 
   public Date getTime() {
     return time;
+  }
+  
+  public Money getPreDiscountTotal() {
+    Money preDiscountTotal = new Money(0);
+    for (LineItem lineItem : lineItems) {
+      preDiscountTotal.add(lineItem.getSubtotal());
+    }
+    return preDiscountTotal;
   }
 
   // by Creator: sale contains line-items
@@ -37,11 +56,7 @@ public class Sale {
 
   // By Information Expert: sale has all the information to calculate total
   public Money getTotal() {
-    Money total = new Money(0);
-    for (LineItem lineItem : lineItems) {
-      total.add(lineItem.getSubtotal());
-    }
-    return total;
+    return pricingStrategy.getTotal(this);
   }
 
   public boolean isComplete() {
