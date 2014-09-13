@@ -42,15 +42,8 @@ public class app {
     for (LineItem item : items) {
       printLineItemRow(item);
     }
-    printTotal(register.getCurrentSale().getTotal().getAmount());
+    printTotal();
     printSeparator();
-  }
-
-  private static void printLineItemRow(LineItem item) {
-    System.out.println(String.format("%d %s:\t%.2f",
-        item.getQuantity(),
-        item.getProductDescription().getDescription(),
-        item.getProductDescription().getPrice().getAmount()));
   }
 
   private static void initializeDomainObjects() {
@@ -97,9 +90,17 @@ public class app {
     catalog = new InMemoryCatalog(products);
   }
 
-  private static void printTotal(double total) {
+  private static void printTotal() {
     System.out.println("");
-    System.out.println("\tTotal:\t" + total);
+    System.out.println("- Total:\t" + register.getCurrentSale().getTotal().getAmount());
+  }
+
+  private static void printLineItemRow(LineItem item) {
+    System.out.println(String.format("> %s\t(%dx%.2f)\t%.2f",
+        item.getProductDescription().getDescription(),
+        item.getQuantity(),
+        item.getProductDescription().getPrice().getAmount(),
+        item.getSubtotal().getAmount()));
   }
 
   private static void printSeparator() {
