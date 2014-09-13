@@ -43,16 +43,16 @@ public class RegisterTest {
 
   @Test
   public void addsAnItemToCurrentSale() throws Exception {
-    register.addSaleItem("12345", 23);
+    register.addSaleItem(12345, 23);
 
     assertThat(register.getCurrentSale().getLineItems().size(), equalTo(1));
   }
 
   @Test
   public void asksCatalogForProductDetails() throws Exception {
-    register.addSaleItem("12345", 12);
+    register.addSaleItem(12345, 12);
 
-    verify(catalog).findProductDescriptionByCode("12345");
+    verify(catalog).findProductDescriptionById(12345);
   }
 
   @Test

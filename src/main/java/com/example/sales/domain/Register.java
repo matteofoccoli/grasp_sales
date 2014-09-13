@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by matteo on 26/08/14.
  */
-// By controller
+// By Controller
 public class Register {
 
   private final ProductCatalog catalog;
@@ -29,9 +29,9 @@ public class Register {
   }
 
   // By Controller
-  public void addSaleItem(String productCode, int quantity) {
+  public void addSaleItem(long productId, int quantity) {
     // By Information Expert
-    final ProductDescription description = catalog.findProductDescriptionByCode(productCode);
+    final ProductDescription description = catalog.findProductDescriptionById(productId);
     // By Creator
     getCurrentSale().addLineItem(description, quantity);
   }
@@ -39,6 +39,10 @@ public class Register {
   // By Controller
   public void endSale() {
     getCurrentSale().becomeComplete();
+    // By Polymorphism
+    // By Indirection
+    // (both are mechanism to protect around variations)
+    // By Protected Variations (instability/predicted variations)
     taxCalculator.getTaxes(getCurrentSale());
   }
 

@@ -5,6 +5,7 @@ package com.example.sales.domain;
  */
 public interface TaxCalculator {
 
+  // By Polymorphism
   void getTaxes(Sale sale);
 
 }
