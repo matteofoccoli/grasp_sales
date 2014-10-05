@@ -37,7 +37,7 @@ public class RegisterTest {
   }
 
   @Test
-  public void createsANewSale() throws Exception {
+  public void createANewSale() throws Exception {
     assertThat(register.getCurrentSale(), notNullValue());
   }
 
