@@ -13,6 +13,7 @@ public class ProductCatalogImplTest {
   @Before
   public void setUp() throws Exception {
     adapter = mock(ProductAdapter.class);
+    when(adapter.findProductDescriptionById(anyLong())).thenReturn(new ProductDescription(23, "Foo", new Money(12)));
     catalog = new ProductCatalogImpl(adapter);
   }
 
@@ -25,8 +26,6 @@ public class ProductCatalogImplTest {
 
   @Test
   public void cachesAdapterResponseLocally() throws Exception {
-    when(adapter.findProductDescriptionById(anyLong())).thenReturn(new ProductDescription(23, "Foo", new Money(12)));
-
     catalog.findProductDescriptionById(23);
     catalog.findProductDescriptionById(23);
 
