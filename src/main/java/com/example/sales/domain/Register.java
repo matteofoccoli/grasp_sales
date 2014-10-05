@@ -37,6 +37,7 @@ public class Register {
   }
 
   // By Controller
+  // When cashier presses a button indicating the end of entering items into a sale
   public void endSale() {
     getCurrentSale().becomeComplete();
     // By Polymorphism
@@ -54,5 +55,5 @@ public class Register {
     // By Information Expert
     store.addCompletedSale(getCurrentSale());
   }
-  
+
 }
